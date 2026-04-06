@@ -1,0 +1,44 @@
+name: Deploy Frontend to S3 and CloudFront
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Frontend/gemini-chat-frontend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./Frontend/gemini-chat-frontend
+        run: npm install
+
+      - name: Build React App
+        working-directory: ./Frontend/gemini-chat-frontend
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+        run: npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Sync dist/ folder to S3 Bucket
+        working-directory: ./Frontend/gemini-chat-frontend
+        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
+
+      - name: Create CloudFront Cache Invalidation
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }} --paths "/*"
