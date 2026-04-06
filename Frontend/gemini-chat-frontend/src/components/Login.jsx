@@ -8,8 +8,9 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
         try {
-            const res = await axios.post("http://localhost:8080/api/auth/login", { username, password });
+            const res = await axios.post(`${BASE_URL}/api/auth/login`, { username, password });
             onLogin(res.data.token);
         } catch (err) {
             setError(err.response?.data?.error || "Invalid credentials");
