@@ -84,4 +84,4 @@ The production environment of this repository relies natively on AWS Elastic Con
 3. The Java framework is packaged exclusively through Docker's multi-stage builds.
 4. The backend image is pushed to AWS ECR, where a target AWS EC2 instance pulls the runtime natively over port 80 via dynamic IAM Role policies!
 
-![CloudFront Behavior Configuration](screenshots/cloudfront_setup.png) *(Note: Take a screenshot of your CloudFront Origins / Behaviors screen)*
+![CloudFront Behavior Configuration](screenshots/cloud-front.png)
