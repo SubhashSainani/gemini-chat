@@ -15,7 +15,34 @@ It is containerized entirely with Docker and orchestrated securely across a robu
 - **Resilience:** Resilience4j (Rate Limiting), Global Exception Handling
 - **DevOps & Cloud:** Docker, GitHub Actions, AWS EC2 (Dockerized Runtime), AWS RDS (Postgres), AWS S3 (Static React Hosting), AWS CloudFront (CDN & API Reverse Proxy), AWS ECR, AWS IAM.
 
-![AWS Architecture Diagram](screenshots/aws_architecture.png) *(Note: Optionally add an architecture block diagram or a screenshot of your GitHub Actions deploying successfully)*
+```mermaid
+graph TD
+    User((User/Browser))
+    
+    subgraph AWS Cloud
+        CF[CloudFront CDN]
+        S3[(AWS S3<br>Static Frontend)]
+        EC2[AWS EC2<br>Docker: Spring Boot]
+        RDS[(AWS RDS<br>PostgreSQL)]
+        ECR[AWS ECR<br>Docker Registry]
+    end
+    
+    subgraph External Systems
+        Gemini[Google Gemini API]
+        GitHub[GitHub Actions]
+    end
+
+    User -- "HTTPS: Visits App" --> CF
+    CF -- "Default Route (/*)" --> S3
+    CF -- "API Proxy (/api/*)" --> EC2
+    
+    EC2 -- "JDBC TCP" --> RDS
+    EC2 -- "REST / SSE" --> Gemini
+    
+    GitHub -- "Sync Static Build" --> S3
+    GitHub -- "Push Docker Image" --> ECR
+    EC2 -- "Pulls Runtime Engine" --> ECR
+```
 
 ---
 
