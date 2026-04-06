@@ -4,7 +4,7 @@ Gemini Vision Chat is a full-stack, multimodal generative AI chat application en
 
 It is containerized entirely with Docker and orchestrated securely across a robust AWS free-tier cloud ecosystem utilizing GitHub Actions CI/CD to facilitate zero-touch deployments.
 
-![GeminiChat App Interface](screenshots/app_ui_demo.png) *(Note: Please add a screenshot of the main chat UI here)*
+![GeminiChat App Interface](screenshots/main-interface.png)
 
 ---
 
