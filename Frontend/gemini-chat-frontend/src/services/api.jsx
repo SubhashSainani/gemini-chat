@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+let BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+if (BASE_URL && !BASE_URL.startsWith("http")) {
+    BASE_URL = "https://" + BASE_URL;
+}
 const API_URL = `${BASE_URL}/api/qna/ask`;
 
 export const streamChatResponse = async (question, file, token, sessionId, onUpdate) => {
