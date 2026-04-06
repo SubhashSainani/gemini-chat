@@ -1,10 +1,10 @@
-# 🚀 NexusAI Cloud Architecture
+# 🚀 Gemini Vision Chat Cloud Architecture
 
-NexusAI is a full-stack, multimodal generative AI chat application engineered for real-time performance and absolute security. By harnessing Google's Gemini Vision API and leveraging a reactive Spring Boot backend, the platform streams AI responses instantly while gracefully handling file analyses, dynamic session routing, and rigorous load management. 
+Gemini Vision Chat is a full-stack, multimodal generative AI chat application engineered for real-time performance and absolute security. By harnessing Google's Gemini Vision API and leveraging a reactive Spring Boot backend, the platform streams AI responses instantly while gracefully handling file analyses, dynamic session routing, and rigorous load management. 
 
 It is containerized entirely with Docker and orchestrated securely across a robust AWS free-tier cloud ecosystem utilizing GitHub Actions CI/CD to facilitate zero-touch deployments.
 
-![NexusAI App Interface](screenshots/app_ui_demo.png) *(Note: Please add a screenshot of the main chat UI here)*
+![GeminiChat App Interface](screenshots/app_ui_demo.png) *(Note: Please add a screenshot of the main chat UI here)*
 
 ---
 
